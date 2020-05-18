@@ -1,0 +1,12 @@
+{
+  "$id": "https://example.com/phone.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Phone",
+  "type": "object",
+  "properties": {
+    "phone": {
+      "type": "string",
+      "pattern": "^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+To register the exact same JSON Schema that was defined, inject the original .json schema
+with the @Schema annotation immedially above the class definition, example:
+
+@Schema(value="{\n" +
+        "  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n" +
+        "  \"title\": \"Case\",\n" +
+        "  \"type\": \"object\",\n" +
+        "  \"properties\": {\n" +
+        "    \"caseId\": {\n" +
+        "      \"type\": \"integer\",\n" +
+        "      \"minimum\": 0,\n" +
+        "      \"description\": \"The id of the case.\"\n" +
+        "    },\n" +
+        "    \"firstName\": {\n" +
+        "      \"type\": \"string\",\n" +
+        "      \"description\": \"The first name of the applicant.\"\n" +
+        "    },\n" +
+        "    \"lastName\": {\n" +
+        "      \"type\": \"string\",\n" +
+        "      \"description\": \"The last name of the applicant.\"\n" +
+        "    },\n" +
+        "    \"email\": {\n" +
+        "      \"type\": \"string\",\n" +
+        "      \"description\": \"The email of the applicant.\"\n" +
+        "    },\n" +
+        "    \"address\": {\n" +
+        "      \"type\": \"string\",\n" +
+        "      \"description\": \"The address of the applicant.\"\n" +
+        "    },\n" +
+        "    \"immigrationStatus\": {\n" +
+        "      \"type\": \"string\",\n" +
+        "      \"enum\": [\n" +
+        "        \"E3\",\n" +
+        "        \"H1B\",\n" +
+        "        \"B1\",\n" +
+        "        \"B2\"\n" +
+        "      ],\n" +
+        "      \"description\": \"The current immigration status.\"\n" +
+        "    }\n" +
+        "  },\n" +
+        "  \"additionalProperties\": false\n" +
+        "}",refs = {})
+public class CaseV1 {
+
+}
+
+Skeleton:
+@Schema(value="JSON SCHEMA HERE",refs = {})

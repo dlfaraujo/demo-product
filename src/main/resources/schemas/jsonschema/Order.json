@@ -1,0 +1,33 @@
+{
+  "$id": "https://example.com/order.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Order",
+  "type": "object",
+  "properties": {
+    "order_id": {
+      "type": "number",
+      "description": "The id of the order"
+    },
+    "order_date": {
+      "type": "string",
+      "description": "The order date."
+    },
+    "order_amount": {
+      "type": "number",
+      "description": "The total amount of the order."
+    },
+    "products": {
+      "type": "array",
+      "description": "The product details of the order.",
+      "items": { "$ref": "Product.json"}
+    },
+    "customer": {
+      "description": "The customer details.",
+      "$ref": "Customer.json"
+    },
+    "payment_method": {
+      "description": "Payment method used.",
+      "$ref": "Payment.json"
+      }
+  }
+}

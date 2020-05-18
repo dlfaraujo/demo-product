@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Case",
+  "type": "object",
+  "properties": {
+    "caseId": {
+      "type": "number",
+      "description": "The id of the case."
+    },
+    "firstName": {
+      "type": "string",
+      "description": "The first name of the applicant."
+    },
+    "lastName": {
+      "type": "string",
+      "description": "The last name of the applicant."
+    },
+    "email": {
+      "type": "string",
+      "description": "The email of the applicant."
+    },
+    "address": {
+      "type": "string",
+      "description": "The address of the applicant."
+    },
+    "immigrationStatus": {
+      "type": "string",
+      "enum": [
+        "E3",
+        "H1B",
+        "B1",
+        "B2"
+      ],
+      "description": "The current immigration status."
+    }
+  },
+  "additionalProperties": false
+}

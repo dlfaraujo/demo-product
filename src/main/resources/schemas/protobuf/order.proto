@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package io.confluent.demo.pojo.protobuf;
+
+option java_outer_classname = "OrderImpl";
+
+import "product.proto";
+import "customer.proto";
+import "payment.proto";
+
+message Order {
+    int32 order_id = 1;
+    string order_date = 2;
+    int32 order_amount = 3;
+    repeated Product products = 4;
+    Customer customer = 5;
+    Payment payment_method = 6;
+}

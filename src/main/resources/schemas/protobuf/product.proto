@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package io.confluent.demo.pojo.protobuf;
+
+option java_outer_classname = "ProductImpl";
+
+message Product {
+    int64 product_id = 1;
+    string product_name = 2;
+    float product_price = 3;
+ }

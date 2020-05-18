@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+    Compile without generating JSON Schema POJOs:
+        mvn compile -DskipGenPOJO
+    Generate schema POJOs:
+        mvn generate-sources (-DskipGenPOJO to skip JSON Schema POJOs)
+    Check unneeded dependencies
+        mvn dependency:analyze
+    -->
+
+    <groupId>io.confluent.schema-registry.demo</groupId>
+    <artifactId>demo-schema-registry</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
+
+    <organization>
+        <name>Confluent, Inc.</name>
+        <url>http://confluent.io</url>
+    </organization>
+    <url>http://confluent.io</url>
+
+    <description>
+        Kafka demo for Schema Registry with examples in Avro, Protobuf and JSON Schema.
+    </description>
+
+    <developers>
+        <developer>
+            <id>dlfaraujo</id>
+            <name>David Araujo</name>
+            <email>dlfaraujo@gmail.com</email>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <confluent.version>5.5.1-SNAPSHOT</confluent.version>
+        <kafka.version>2.5.0</kafka.version>
+        <schema.registry.url>http://localhost:8081</schema.registry.url>
+        <schema.registry.basic.auth.user.info></schema.registry.basic.auth.user.info>
+
+        <avro-maven-plugin>1.9.2</avro-maven-plugin>
+        <protoc.jar.maven.plugin>3.11.1</protoc.jar.maven.plugin>
+        <jsonschema2pojo-maven-plugin>1.0.2</jsonschema2pojo-maven-plugin>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <slf4j-api.version>1.7.6</slf4j-api.version>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.plugin>3.8.1</maven.compiler.plugin>
+
+        <maven-javadoc-plugin>3.2.0</maven-javadoc-plugin>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>http://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>connect-runtime</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-streams-avro-serde</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>${avro-maven-plugin}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-json-serializer</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-json-schema-serializer</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-schema-serializer</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-protobuf-serializer</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-protobuf-provider</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-streams-json-schema-serde</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-streams-protobuf-serde</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-schema-registry-client</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>0.12</version>
+        </dependency>
+        <!-- * this is the json schema dependency to create a json schema from a java class
+             * for some reason when used in conjunction with the jsonschema2pojo plugin below that generate classes from schema, it gives a scala error: Caused by: java.lang.NoClassDefFoundError: scala/Serializable
+          <dependency>
+              <groupId>com.kjetland</groupId>
+              <artifactId>mbknor-jackson-jsonschema_2.13</artifactId>
+              <version>1.0.38</version>
+          </dependency>
+          -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin}</version>
+                <configuration>
+                    <show>private</show>
+                    <nohelp>true</nohelp>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+
+            <!-- Schema Registry Maven plugin - example below show how to register with reference schemas (available since CP 5.5.1)-->
+            <!-- goals: register, download, test-compatibility -->
+
+            <!-- Simple schema without references -->
+            <!--
+            <plugin>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+                <version>${confluent.version}</version>
+                <configuration>
+                    <schemaRegistryUrls>
+                        <param>${schema.registry.url}</param>
+                    </schemaRegistryUrls>
+                    <userInfoConfig>${schema.registry.basic.auth.user.info}</userInfoConfig>
+                    <outputDirectory>schemas</outputDirectory>
+                    <subjectPatterns>
+                        <param>^caseV(version)$</param>
+                    </subjectPatterns>
+                    <schemaExtension>.proto</schemaExtension>
+                    <subjects/>
+                </configuration>
+            </plugin> -->
+
+            <!-- Registering reference schemas
+                 The <reference><name> logic is as follow:
+					if type = PROTOBUF use the 'import' from the schema
+					if type = JSON use the '$ref' from the schema
+					if type = AVRO use the 'type' from the schema -->
+
+            <!-- Avro reference schemas -->
+            <plugin>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+                <version>${confluent.version}</version>
+                <configuration>
+                    <schemaRegistryUrls>
+                        <param>${schema.registry.url}</param>
+                    </schemaRegistryUrls>
+                    <userInfoConfig>${schema.registry.basic.auth.user.info}</userInfoConfig>
+                    <outputDirectory>schemas</outputDirectory>
+                    <subjects>
+                        <order>src/main/resources/schemas/avro/order.avsc</order>
+                        <product>src/main/resources/schemas/avro/product.avsc</product>
+                        <customer>src/main/resources/schemas/avro/customer.avsc</customer>
+                        <payment>src/main/resources/schemas/avro/payment.avsc</payment>
+                    </subjects>
+                    <schemaTypes>
+                        <order>AVRO</order>
+                        <product>AVRO</product>
+                        <customer>AVRO</customer>
+                        <payment>AVRO</payment>
+                    </schemaTypes>
+                    <references>
+                        <order>
+                            <reference>
+                                <name>io.confluent.demo.pojo.avro.product</name>
+                                <subject>product</subject>
+                            </reference>
+                            <reference>
+                                <name>io.confluent.demo.pojo.avro.customer</name>
+                                <subject>customer</subject>
+                            </reference>
+                            <reference>
+                                <name>io.confluent.demo.pojo.avro.payment</name>
+                                <subject>payment</subject>
+                            </reference>
+                        </order>
+                    </references>
+                </configuration>
+            </plugin>
+            <!-- Protobuf reference schemas -->
+            <!--
+            <plugin>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+                <version>${confluent.version}</version>
+                <configuration>
+                    <schemaRegistryUrls>
+                        <param>${schema.registry.url}</param>
+                    </schemaRegistryUrls>
+                    <userInfoConfig>${schema.registry.basic.auth.user.info}</userInfoConfig>
+                    <outputDirectory>schemas</outputDirectory>
+                    <subjects>
+                        <order>src/main/resources/schemas/protobuf/order.proto</order>
+                        <product>src/main/resources/schemas/protobuf/product.proto</product>
+                        <customer>src/main/resources/schemas/protobuf/customer.proto</customer>
+                        <payment>src/main/resources/schemas/protobuf/payment.proto</payment>
+                    </subjects>
+                    <schemaTypes>
+                        <order>PROTOBUF</order>
+                        <product>PROTOBUF</product>
+                        <customer>PROTOBUF</customer>
+                        <payment>PROTOBUF</payment>
+                    </schemaTypes>
+                    <references>
+                        <order>
+                            <reference>
+                                <name>product.proto</name>
+                                <subject>product</subject>
+                            </reference>
+                            <reference>
+                                <name>customer.proto</name>
+                                <subject>customer</subject>
+                            </reference>
+                            <reference>
+                                <name>payment.proto</name>
+                                <subject>payment</subject>
+                            </reference>
+                        </order>
+                    </references>
+                </configuration>
+            </plugin>
+            -->
+            <!-- JSON Schema reference schemas -->
+            <!--
+            <plugin>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+                <version>${confluent.version}</version>
+                <configuration>
+                    <schemaRegistryUrls>
+                        <param>${schema.registry.url}</param>
+                    </schemaRegistryUrls>
+                    <userInfoConfig>${schema.registry.basic.auth.user.info}</userInfoConfig>
+                    <outputDirectory>schemas</outputDirectory>
+                    <subjects>
+                        <main>src/main/resources/schemas/jsonschema/genericJSONRefMain.json</main>
+                        <ref1>src/main/resources/schemas/jsonschema/genericJSONRef1.json</ref1>
+                        <ref2>src/main/resources/schemas/jsonschema/genericJSONRef2.json</ref2>
+                    </subjects>
+                    <schemaTypes>
+                        <main>JSON</main>
+                        <ref1>JSON</ref1>
+                        <ref2>JSON</ref2>
+                    </schemaTypes>
+                    <references>
+                        <main>
+                            <reference>
+                                <name>genericJSONRef1.json</name>
+                                <subject>ref1</subject>
+                            </reference>
+                            <reference>
+                                <name>genericJSONRef2.json</name>
+                                <subject>ref2</subject>
+                            </reference>
+                        </main>
+                    </references>
+                </configuration>
+            </plugin>
+            -->
+
+            <!-- Generate POJO Plugins - example below show how to generate code for Avro, Protobuf and JSON Schemas -->
+            <!-- Avro POJO Plugin -->
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>${avro-maven-plugin}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                            <!-- <goal>idl-protocol</goal> -->
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>src/main/resources/schemas/avro/</sourceDirectory>
+                            <outputDirectory>src/main/java/</outputDirectory>
+                            <imports> <!-- import the schema refs, in this case order.avsc refs 3 schemas -->
+                                <import>src/main/resources/schemas/avro/product.avsc</import>
+                                <import>src/main/resources/schemas/avro/payment.avsc</import>
+                                <import>src/main/resources/schemas/avro/customer.avsc</import>
+                            </imports>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Protobuf POJO Plugin -->
+            <plugin>
+                <groupId>com.github.os72</groupId>
+                <artifactId>protoc-jar-maven-plugin</artifactId>
+                <version>${protoc.jar.maven.plugin}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <inputDirectories>
+                                <include>src/main/resources/schemas/protobuf</include>
+                            </inputDirectories>
+                            <outputTargets>
+                                <outputTarget>
+                                    <type>java</type>
+                                    <addSources>none</addSources>
+                                    <outputDirectory>src/main/java/</outputDirectory>
+                                </outputTarget>
+                            </outputTargets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Json Schema POJO Plugin -->
+            <!-- note 1: this plugin will generate classes that un-nests all ref schemas,
+                       to restore original references on the parent schema use the @Schema annotation with the
+                       original Json Schema. -->
+            <!-- note 2: to not run this plugin when generating all sources use mvn generate-sources -DskipGenPOJO. -->
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>${jsonschema2pojo-maven-plugin}</version>
+                <configuration>
+                    <sourceDirectory>src/main/resources/schemas/jsonschema</sourceDirectory>
+                    <targetPackage>io.confluent.demo.pojo.jsonschema</targetPackage>
+                    <outputDirectory>src/main/java/</outputDirectory>
+                    <skip>${skipGenPOJO}</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

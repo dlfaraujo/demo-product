@@ -1,0 +1,21 @@
+syntax = "proto3";
+package io.confluent.demo.pojo.protobuf;
+option java_outer_classname = "CaseV2Impl";
+
+message Case {
+    int64 caseId = 1;
+    string firstName = 2;
+    string lastName = 3;
+    string address = 4;
+    string email = 5;
+    enum ImmigrationStatus {
+        E3 = 0;
+        H1B = 1;
+        B1 = 2;
+        B2 = 3;
+    }
+    ImmigrationStatus immigrationStatus = 6;
+    sint32 aNumber = 7;
+}
+
+

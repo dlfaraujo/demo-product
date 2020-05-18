@@ -1,0 +1,14 @@
+{
+  "$id": "https://example.com/customerorpatment.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CustomerOrPayment",
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "Customer.json"
+    },
+    {
+      "$ref": "Payment.json"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "name": "person",
+  "type": "record",
+  "namespace": "io.confluent.demo.pojo.avro",
+  "fields": [
+    {
+      "name": "firstname",
+      "type": "string"
+    },
+    {
+      "name": "lastname",
+      "type": "string"
+    },
+    {
+      "name": "address",
+      "type": {
+        "type": "record",
+        "name": "AddressUSRecord",
+        "fields": [
+          {
+            "name": "streetaddress",
+            "type": "string"
+          },
+          {
+            "name": "city",
+            "type": {
+              "type": "record",
+              "name": "cityinUS",
+              "fields": [
+                {
+                  "name": "city1",
+                  "type": "string"
+                },
+                {
+                  "name": "city2",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

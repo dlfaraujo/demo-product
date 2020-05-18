@@ -1,0 +1,13 @@
+/**
+ * An example protocol in Avro IDL
+ */
+@namespace("io.confluent.avro.test")
+protocol PaymentInterface {
+
+  record Payment {
+    int payment_method_code;
+    long card_number;
+    string expiration_date;
+    int cvv;
+  }
+}

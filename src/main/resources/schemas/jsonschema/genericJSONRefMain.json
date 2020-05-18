@@ -1,0 +1,16 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RefsParent",
+  "type": "object",
+  "properties": {
+
+    "ref1": {
+      "description": "Ref 1.",
+      "$ref": "genericJSONRef1.json"
+    },
+    "ref2": {
+      "description": "Ref 2.",
+      "$ref": "genericJSONRef2.json"
+    }
+  }
+}

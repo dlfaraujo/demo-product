@@ -1,0 +1,23 @@
+{
+ "type": "record",
+ "namespace": "io.confluent.demo.pojo.avro",
+ "name": "PaymentEnum",
+ "fields": [
+     {
+       "name": "enumValue",
+       "type": {
+         "name": "payment_method_code",
+         "type": "enum",
+         "symbols": [
+           "1",
+           "2",
+           "3",
+           "4"
+         ]
+       }
+     },
+     {"name": "card_number", "type": "long"},
+     {"name": "expiration_date", "type": "string"},
+     {"name": "cvv", "type": "int"}
+ ]
+}

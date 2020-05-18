@@ -1,0 +1,583 @@
+{
+  "Schema": {
+    "Fields": [
+      {
+        "Name": "TenderId",
+        "Pos": 0,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "Operative",
+        "Pos": 1,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "boolean",
+          "Tag": 1
+        }
+      },
+      {
+        "Name": "AbsoluteMinPrice",
+        "Pos": 2,
+        "Ordering": 2,
+        "Schema": {
+          "Schemas": [
+            {
+              "Name": "null",
+              "Tag": 0
+            },
+            {
+              "Name": "bytes",
+              "Tag": 6
+            }
+          ],
+          "Count": 2,
+          "Name": "union",
+          "Tag": 12
+        }
+      },
+      {
+        "Name": "AbsoluteMaxPrice",
+        "Pos": 3,
+        "Ordering": 2,
+        "Schema": {
+          "Schemas": [
+            {
+              "Name": "null",
+              "Tag": 0
+            },
+            {
+              "Name": "bytes",
+              "Tag": 6
+            }
+          ],
+          "Count": 2,
+          "Name": "union",
+          "Tag": 12
+        }
+      },
+      {
+        "Name": "ProductEvaluation",
+        "Pos": 4,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "boolean",
+          "Tag": 1
+        }
+      },
+      {
+        "Name": "MinScore",
+        "Pos": 5,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "MaxScore",
+        "Pos": 6,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "MinRating",
+        "Pos": 7,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "MaxRating",
+        "Pos": 8,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "Method",
+        "Pos": 9,
+        "Documentation": "Logical enumtype is Mercell.Mts.TenderEvaluationMethod\r\nPossible values: NoEvaluation(0), LowestPrice(1), Absolute(2), Relative(3), CostQualityRatio(4), ProductEvalPriceRating(5), EvaluationOutsideMercell(6)",
+        "Ordering": 2,
+        "Schema": {
+          "Fields": [
+            {
+              "Name": "Id",
+              "Pos": 0,
+              "Ordering": 2,
+              "Schema": {
+                "Name": "int",
+                "Tag": 2
+              }
+            },
+            {
+              "Name": "FriendlyName",
+              "Pos": 1,
+              "Ordering": 2,
+              "Schema": {
+                "Schemas": [
+                  {
+                    "Name": "string",
+                    "Tag": 7
+                  }
+                ],
+                "Count": 1,
+                "Name": "union",
+                "Tag": 12
+              }
+            }
+          ],
+          "Count": 2,
+          "SchemaName": {
+            "Name": "EnumValue",
+            "Space": "Mercell.DataTypes.Avro",
+            "EncSpace": "Mercell.DataTypes.Avro.Mts",
+            "Fullname": "Mercell.DataTypes.Avro.EnumValue",
+            "Namespace": "Mercell.DataTypes.Avro"
+          },
+          "Name": "EnumValue",
+          "Namespace": "Mercell.DataTypes.Avro",
+          "Fullname": "Mercell.DataTypes.Avro.EnumValue",
+          "Tag": 8
+        }
+      },
+      {
+        "Name": "Id",
+        "Pos": 10,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "Guid",
+        "Pos": 11,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "string",
+          "Tag": 7
+        }
+      },
+      {
+        "Name": "ObjecttypeId",
+        "Pos": 12,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "CreateDate",
+        "Pos": 13,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "long",
+          "Tag": 3
+        }
+      },
+      {
+        "Name": "CreatorId",
+        "Pos": 14,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "Namespace",
+        "Pos": 15,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "string",
+          "Tag": 7
+        }
+      },
+      {
+        "Name": "OriginDate",
+        "Pos": 16,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "long",
+          "Tag": 3
+        }
+      },
+      {
+        "Name": "VersionDate",
+        "Pos": 17,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "long",
+          "Tag": 3
+        }
+      },
+      {
+        "Name": "IsLocked",
+        "Pos": 18,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "boolean",
+          "Tag": 1
+        }
+      },
+      {
+        "Name": "IsArchived",
+        "Pos": 19,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "boolean",
+          "Tag": 1
+        }
+      },
+      {
+        "Name": "Deleted",
+        "Pos": 20,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "boolean",
+          "Tag": 1
+        }
+      },
+      {
+        "Name": "CreatorSessionId",
+        "Pos": 21,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "ArchiverSessionId",
+        "Pos": 22,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "LockerSessionId",
+        "Pos": 23,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "DraftVId",
+        "Pos": 24,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "PublishedVId",
+        "Pos": 25,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "Republishdate",
+        "Pos": 26,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "long",
+          "Tag": 3
+        }
+      },
+      {
+        "Name": "Obliterate",
+        "Pos": 27,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "boolean",
+          "Tag": 1
+        }
+      },
+      {
+        "Name": "Timestamp",
+        "Pos": 28,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "long",
+          "Tag": 3
+        }
+      },
+      {
+        "Name": "VId",
+        "Pos": 29,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "LoadedVersion",
+        "Pos": 30,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "Revision",
+        "Pos": 31,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "DefaultLcid",
+        "Pos": 32,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "Lcid",
+        "Pos": 33,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "Name",
+        "Pos": 34,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "string",
+          "Tag": 7
+        }
+      },
+      {
+        "Name": "Description",
+        "Pos": 35,
+        "Documentation": "Desription from object info. Might contain html",
+        "Ordering": 2,
+        "Schema": {
+          "Name": "string",
+          "Tag": 7
+        }
+      },
+      {
+        "Name": "Published",
+        "Pos": 36,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "boolean",
+          "Tag": 1
+        }
+      },
+      {
+        "Name": "Keywords",
+        "Pos": 37,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "string",
+          "Tag": 7
+        }
+      },
+      {
+        "Name": "Version",
+        "Pos": 38,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "ChangeDate",
+        "Pos": 39,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "long",
+          "Tag": 3
+        }
+      },
+      {
+        "Name": "Publishdate",
+        "Pos": 40,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "long",
+          "Tag": 3
+        }
+      },
+      {
+        "Name": "NameUrl",
+        "Pos": 41,
+        "Ordering": 2,
+        "Schema": {
+          "Schemas": [
+            {
+              "Name": "null",
+              "Tag": 0
+            },
+            {
+              "Name": "string",
+              "Tag": 7
+            }
+          ],
+          "Count": 2,
+          "Name": "union",
+          "Tag": 12
+        }
+      },
+      {
+        "Name": "ChangerSessionId",
+        "Pos": 42,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "PublisherSessionId",
+        "Pos": 43,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "int",
+          "Tag": 2
+        }
+      },
+      {
+        "Name": "ToBePublished",
+        "Pos": 44,
+        "Ordering": 2,
+        "Schema": {
+          "Name": "boolean",
+          "Tag": 1
+        }
+      }
+    ],
+    "Count": 45,
+    "SchemaName": {
+      "Name": "TenderEvaluationAvro",
+      "Space": "Mercell.DataTypes.Avro.Mts",
+      "Fullname": "Mercell.DataTypes.Avro.Mts.TenderEvaluationAvro",
+      "Namespace": "Mercell.DataTypes.Avro.Mts"
+    },
+    "Name": "TenderEvaluationAvro",
+    "Namespace": "Mercell.DataTypes.Avro.Mts",
+    "Fullname": "Mercell.DataTypes.Avro.Mts.TenderEvaluationAvro",
+    "Tag": 8
+  },
+  "TenderId": 107162960,
+  "Operative": true,
+  "ProductEvaluation": false,
+  "MinScore": 0,
+  "MaxScore": 10,
+  "MinRating": 0,
+  "MaxRating": 10,
+  "Method": {
+    "Id": 3,
+    "FriendlyName": "Relative",
+    "Schema": {
+      "Fields": [
+        {
+          "Name": "Id",
+          "Pos": 0,
+          "Ordering": 2,
+          "Schema": {
+            "Name": "int",
+            "Tag": 2
+          }
+        },
+        {
+          "Name": "FriendlyName",
+          "Pos": 1,
+          "Ordering": 2,
+          "Schema": {
+            "Schemas": [
+              {
+                "Name": "null",
+                "Tag": 0
+              },
+              {
+                "Name": "string",
+                "Tag": 7
+              }
+            ],
+            "Count": 2,
+            "Name": "union",
+            "Tag": 12
+          }
+        }
+      ],
+      "Count": 2,
+      "SchemaName": {
+        "Name": "EnumValue",
+        "Space": "Mercell.DataTypes.Avro",
+        "Fullname": "Mercell.DataTypes.Avro.EnumValue",
+        "Namespace": "Mercell.DataTypes.Avro"
+      },
+      "Name": "EnumValue",
+      "Namespace": "Mercell.DataTypes.Avro",
+      "Fullname": "Mercell.DataTypes.Avro.EnumValue",
+      "Tag": 8
+    }
+  },
+  "Id": 107162965,
+  "Guid": "1c19cc51-98d4-47c5-9854-1b6e6732d311",
+  "ObjecttypeId": 234,
+  "CreateDate": "2020-03-31T09:27:23.007Z",
+  "CreatorId": 0,
+  "Namespace": "",
+  "OriginDate": "2020-03-31T09:27:21.88Z",
+  "VersionDate": "0001-01-01T00:00:00",
+  "IsLocked": false,
+  "IsArchived": false,
+  "Deleted": false,
+  "CreatorSessionId": 645599702,
+  "ArchiverSessionId": 0,
+  "LockerSessionId": 0,
+  "DraftVId": 143814045,
+  "PublishedVId": 0,
+  "Republishdate": "0001-01-01T00:00:00",
+  "Obliterate": false,
+  "Timestamp": 998643726,
+  "VId": 143814045,
+  "LoadedVersion": 1,
+  "Revision": 1,
+  "DefaultLcid": 0,
+  "Lcid": 0,
+  "Name": "Default",
+  "Description": "",
+  "Published": false,
+  "Keywords": "",
+  "Version": 0,
+  "ChangeDate": "2020-03-31T09:28:00.91Z",
+  "Publishdate": "0001-01-01T00:00:00",
+  "ChangerSessionId": 645599702,
+  "PublisherSessionId": 0,
+  "ToBePublished": false
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.mycorp.mynamespace;
+
+/* Sample schema to help you get started, refer to https://developers.google.com/protocol-buffers/docs/proto3 to learn more about Protobuf schemas." */
+
+message MyRecord {
+    int32  myField1 = 1;
+    double  myField2 = 2;
+    string  myField3 = 3;
+}

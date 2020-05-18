@@ -1,0 +1,24 @@
+{
+  "$id": "https://example.com/payment.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Payment",
+  "type": "object",
+  "properties": {
+    "payment_method_code": {
+      "type": "number",
+      "description": "The payment method id."
+    },
+    "card_number": {
+      "type": "number",
+      "description": "The credit card number."
+    },
+    "expiration_date": {
+      "type": "string",
+      "description": "The expiration of the credit card YY/MM."
+    },
+    "cvv": {
+      "type": "number",
+      "description": "The cvv of the credit card."
+    }
+  }
+}

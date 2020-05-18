@@ -1,0 +1,13 @@
+{
+ "type": "record",
+ "namespace": "io.confluent.demo.pojo.avro",
+ "name": "Paymentv2",
+
+ "fields": [
+     {"name": "payment_method_code", "type": "int"},
+     {"name": "card_number", "type": "long"},
+     {"name": "expiration_date", "type": ["null","string"], "default": null},
+     {"name": "cvv", "type": "int"},
+     {"name": "description", "type": ["null", "string"]}
+ ]
+}

@@ -1,0 +1,15 @@
+/examples/
+/scripts/cli/
+/scripts/connectors/
+/scripts/ksql/
+/scripts/rest-proxy/
+/scripts/sr-rest-api/
+.idea
+/target/
+demo-product.iml
+demo-schema-registry.iml
+pom.xml_backup
+README MAVEN.md
+classes
+/src/main/resources/backup/
+/src/main/java/io/confluent/demo/apps/kstreams/

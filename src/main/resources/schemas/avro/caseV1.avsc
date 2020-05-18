@@ -1,0 +1,44 @@
+{
+  "type": "record",
+  "namespace": "io.confluent.demo.pojo.avro",
+  "name": "Case",
+  "fields": [
+    {
+      "name": "caseId",
+      "type": "long"
+    },
+    {
+      "name": "firstName",
+      "type": "string"
+    },
+    {
+      "name": "lastName",
+      "type": "string"
+    },
+    {
+      "name": "email",
+      "type": "string"
+    },
+    {
+      "name": "address",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "immigrationStatus",
+      "type": {
+        "type": "enum",
+        "name": "ImmigrationStatus",
+        "symbols": [
+          "E3",
+          "H1B",
+          "B1",
+          "B2"
+        ]
+      }
+    }
+  ]
+}

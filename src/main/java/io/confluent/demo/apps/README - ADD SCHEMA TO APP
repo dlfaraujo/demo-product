@@ -1,0 +1,15 @@
+1. Put new schema under the schemas folder
+
+2. Run maven plugin to generate POJO (if Json Schema add the @Schema annotation to the POJO class with the raw schema)
+
+3. Create an event generator for the schema under the events_generator package
+    note: use com.github.javafaker.Faker to generate fake data
+
+4. Add the new event generator to the EventGenerator class
+
+5. Add the POJO class to the pojo.properties under resources:
+    example - jsonschema.caseV3=io.confluent.demo.pojo.jsonschema.CaseV3
+
+6. On the demo.sh that is under scripts/cli add a new option for the new schema on the function chooseSchema:
+    echo "  7.) newSchema"
+    5 ) printf ${GREEN}; cat $schemas_dir/$format/newSchema$extension; printf "${NONE} \n"; schema="newSchema"; return ;;

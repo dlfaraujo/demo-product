@@ -1,0 +1,17 @@
+[
+  {
+    "name": "io.confluent.examples.generated_sources.protobuf.Product",
+    "subject": "Product",
+    "version": 1
+  },
+  {
+    "name": "io.confluent.examples.generated_sources.protobuf.Payment",
+    "subject": "Payment",
+    "version": 1
+  },
+  {
+    "name": "io.confluent.examples.generated_sources.protobuf.Customer",
+    "subject": "Customer",
+    "version": 1
+  }
+]
