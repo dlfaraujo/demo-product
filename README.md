@@ -16,7 +16,7 @@ It includes the following:
 * Access to a [Confluent Prod Cloud](https://confluent.cloud/login) cluster
 * Access to a [Confluent Devel Cloud](https://devel.cpdev.cloud/login) cluster
 * Access to a [Confluent Local Platform](http://localhost:9021/) cluster
-* Property files located in './src/main/properties/' with clients information (including authentication credentials for Prod Cloud and Devel Cloud)
+* Property files located in './src/main/properties/' with clients information (including authentication credentials for cloud)
 
 Example Cloud devel JSON Schema property file:\
 ```shell
