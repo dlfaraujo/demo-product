@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package costar.events.suite.property;
+option csharp_namespace = "CoStar.Events.Suite.Property";
+
+message DetailViewed {
+	uint32 property_id = 1;
+	string tab_name = 2;
+	uint32 tab_id = 3;
+	uint32 sub_tab_id = 4;
+}

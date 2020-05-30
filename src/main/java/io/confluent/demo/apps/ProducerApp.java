@@ -3,6 +3,7 @@ package io.confluent.demo.apps;
 import io.confluent.demo.events_generator.EventGenerator;
 import io.confluent.demo.utils.ClientsUtils;
 import io.confluent.demo.utils.ColouredSystemOutPrintln;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.*;
 
 import java.io.IOException;
@@ -88,7 +89,10 @@ public class ProducerApp {
      * @return Nothing.
      */
     public static void main(final String[] args) throws IOException {
-        if (args.length < 5) {
+
+        int numArgs = args.length;
+
+        if (numArgs < 5) {
             System.out.println("Please provide command line arguments: resourcesDir propertiesFile serializationType schema topicName <optional numberMessages>");
             System.exit(1);
         }
@@ -104,11 +108,17 @@ public class ProducerApp {
         String schema = args[3];
         String topicName = args[4];
         Long numberMessages = new Long(10); // if not passed set 10 messages to send
-        if (args.length == 6)
+        if (numArgs >= 6)
             numberMessages = new Long(args[5]);
 
         // Load properties file that contains Kafka and Schema Registry properties - cp_local.properties; ccloud_devel.properties; ccloud_prod.properties
         final Properties props = ClientsUtils.loadConfig(resourcesDir + "/" + propertiesFile);
+
+        // use the client.id from args
+        if (numArgs == 7)
+            props.put(ProducerConfig.CLIENT_ID_CONFIG, args[6]);
+        else
+            props.put(ProducerConfig.CLIENT_ID_CONFIG, topicName);
 
         // Get serdes classes from serdes.properties
         Properties serdesProperties = ClientsUtils.loadConfig(resourcesDir + "/serdes.properties");

@@ -49,7 +49,9 @@ public class ConsumerApp {
      */
     public static void main(final String[] args) throws Exception {
 
-        if (args.length < 5) {
+        int numArgs = args.length;
+
+        if (numArgs < 5) {
             System.out.println("Please provide command line arguments: resourcesDir propertiesFile serializationType schema topicName");
             System.exit(1);
         }
@@ -89,12 +91,19 @@ public class ConsumerApp {
                 Class<?> innerPojoClass = pojoClass.getDeclaredClasses()[0];
                 props.put(KafkaProtobufDeserializerConfig.SPECIFIC_PROTOBUF_VALUE_TYPE, innerPojoClass);
             case "jsonschema":
-                props.setProperty("json.fail.invalid.schema","true");
+                props.setProperty("json.fail.invalid.schema", "true");
                 props.put(KafkaJsonSchemaDeserializerConfig.JSON_VALUE_TYPE, pojo);
         }
 
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "demo-consumer-" + serializationType + "_" + schema + "-1");
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        // use the client.id and consumer.group.id from args
+        if (numArgs == 7) {
+            props.put(ConsumerConfig.CLIENT_ID_CONFIG, args[5]);
+            props.put(ConsumerConfig.GROUP_ID_CONFIG, args[6]);
+        }
+        else {
+            props.put(ConsumerConfig.GROUP_ID_CONFIG, "demo-consumer-" + serializationType + "_" + schema + "-1");
+            props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        }
 
         final Consumer<String, Object> consumer = new KafkaConsumer<String, Object>(props);
         consumer.subscribe(Arrays.asList(topicName));

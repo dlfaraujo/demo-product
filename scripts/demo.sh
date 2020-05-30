@@ -85,10 +85,10 @@ function chooseSchema
  read option
  echo ""
  case $option in
- 1 ) printf ${GREEN}; cat $schemas_dir/$format/caseV1$extension; printf "${NONE} \n"; schema="caseV1"; return ;;
- 2 ) printf ${GREEN}; cat $schemas_dir/$format/caseV2$extension; printf "${NONE} \n"; schema="caseV2"; return ;;
- 3 ) printf ${GREEN}; cat $schemas_dir/$format/caseV3$extension; printf "${NONE} \n"; schema="caseV3"; return ;;
- 4 ) printf ${GREEN}; cat $schemas_dir/$format/order$extension; printf "${NONE} \n"; schema="order"; return ;;
+ 1 ) printf ${GREEN}; cat $project_dir/$schemas_dir/$format/caseV1$extension; printf "${NONE} \n"; schema="caseV1"; return ;;
+ 2 ) printf ${GREEN}; cat $project_dir/$schemas_dir/$format/caseV2$extension; printf "${NONE} \n"; schema="caseV2"; return ;;
+ 3 ) printf ${GREEN}; cat $project_dir/$schemas_dir/$format/caseV3$extension; printf "${NONE} \n"; schema="caseV3"; return ;;
+ 4 ) printf ${GREEN}; cat $project_dir/$schemas_dir/$format/order$extension; printf "${NONE} \n"; schema="order"; return ;;
  5 ) schema="benchmark"; return ;;
  6 ) main_menu; return ;;
 
@@ -102,15 +102,18 @@ function produce
  printf "Name of topic: "
  read topicName
 
+ printf "Client ID: "
+ read clientId
+
  printf "Number of messages: "
  read numMessages
 
  echo ""
  # resourcesDir propertiesFile serializationType schema topicName numberMessages
  case $location in
- cp_local ) cd $project_dir; mvn exec:java -Dexec.mainClass="io.confluent.demo.apps.ProducerApp" -Dexec.args="$properties_dir $cp_local $format $schema $topicName $numMessages" ;;
- ccloud_devel ) cd $project_dir; mvn exec:java -Dexec.mainClass="io.confluent.demo.apps.ProducerApp" -Dexec.args="$properties_dir $ccloud_devel $format $schema $topicName $numMessages" ;;
- ccloud_prod ) cd $project_dir; mvn exec:java -Dexec.mainClass="io.confluent.demo.apps.ProducerApp" -Dexec.args="$properties_dir $ccloud_prod $format $schema $topicName $numMessages" ;;
+ cp_local ) cd $project_dir; mvn exec:java -Dexec.mainClass="io.confluent.demo.apps.ProducerApp" -Dexec.args="$properties_dir $cp_local $format $schema $topicName $numMessages $clientId" ;;
+ ccloud_devel ) cd $project_dir; mvn exec:java -Dexec.mainClass="io.confluent.demo.apps.ProducerApp" -Dexec.args="$properties_dir $ccloud_devel $format $schema $topicName $numMessages $clientId" ;;
+ ccloud_prod ) cd $project_dir; mvn exec:java -Dexec.mainClass="io.confluent.demo.apps.ProducerApp" -Dexec.args="$properties_dir $ccloud_prod $format $schema $topicName $numMessages $clientId" ;;
  esac
 }
 
@@ -119,12 +122,18 @@ function consume
  printf "Name of topic: "
  read topicName
 
+ printf "Client ID: "
+ read clientId
+
+ printf "Consumer Group ID: "
+ read consumerGroupId
+
  echo ""
  # resourcesDir propertiesFile serializationType schema topicName
  case $location in
- cp_local ) cd $project_dir; mvn exec:java -Dexec.mainClass="io.confluent.demo.apps.ConsumerApp" -Dexec.args="$properties_dir $cp_local $format $schema $topicName" ;;
- ccloud_devel ) cd $project_dir; mvn exec:java -Dexec.mainClass="io.confluent.demo.apps.ConsumerApp" -Dexec.args="$properties_dir $ccloud_devel $format $schema $topicName" ;;
- ccloud_prod ) cd $project_dir; mvn exec:java -Dexec.mainClass="io.confluent.demo.apps.ConsumerApp" -Dexec.args="$properties_dir $ccloud_prod $format $schema $topicName" ;;
+ cp_local ) cd $project_dir; mvn exec:java -Dexec.mainClass="io.confluent.demo.apps.ConsumerApp" -Dexec.args="$properties_dir $cp_local $format $schema $topicName $clientId $consumerGroupId" ;;
+ ccloud_devel ) cd $project_dir; mvn exec:java -Dexec.mainClass="io.confluent.demo.apps.ConsumerApp" -Dexec.args="$properties_dir $ccloud_devel $format $schema $topicName $clientId $consumerGroupId" ;;
+ ccloud_prod ) cd $project_dir; mvn exec:java -Dexec.mainClass="io.confluent.demo.apps.ConsumerApp" -Dexec.args="$properties_dir $ccloud_prod $format $schema $topicName $clientId $consumerGroupId" ;;
  esac
 }
 
