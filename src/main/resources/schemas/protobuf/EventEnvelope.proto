@@ -2,10 +2,15 @@ syntax = "proto3";
 
 package costar.events;
 
+<<<<<<< HEAD
 import "google/protobuf/any.proto";
 import "google/protobuf/timestamp.proto";
 
 //import "costar/events/BytesKind.proto";
+=======
+import "google/protobuf/Any.proto";
+import "costar/events/BytesKind.proto";
+>>>>>>> 335f758b452488ec0779b8e327fdaf06d759bbab
 
 option csharp_namespace = "CoStar.Events";
 
@@ -14,10 +19,19 @@ message EventEnvelope {
 	int64 timestamp = 1;
     google.protobuf.Any event = 2;
 
+<<<<<<< HEAD
 //	bytes central_subject = 3 [(bytes_kind) = UUID];
 //	fixed32 contact_id = 4;
 //	bytes central_session_uuid = 5 [(bytes_kind) = UUID];
 //	bytes client_activity_uuid = 6 [(bytes_kind) = UUID];
 //	bytes client_ip_address = 7 [(bytes_kind) = IP_ADDRESS];
 //	string client_session_key = 8;
+=======
+	bytes central_subject = 3 [(bytes_kind) = UUID];
+	fixed32 contact_id = 4;
+	bytes central_session_uuid = 5 [(bytes_kind) = UUID];
+	bytes client_activity_uuid = 6 [(bytes_kind) = UUID];
+	bytes client_ip_address = 7 [(bytes_kind) = IP_ADDRESS];
+	string client_session_key = 8;
+>>>>>>> 335f758b452488ec0779b8e327fdaf06d759bbab
 }

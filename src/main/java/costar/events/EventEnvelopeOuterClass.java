@@ -716,16 +716,26 @@ public final class EventEnvelopeOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\023EventEnvelope.proto\022\rcostar.events\032\031go" +
+<<<<<<< HEAD
       "ogle/protobuf/any.proto\032\037google/protobuf" +
       "/timestamp.proto\"G\n\rEventEnvelope\022\021\n\ttim" +
       "estamp\030\001 \001(\003\022#\n\005event\030\002 \001(\0132\024.google.pro" +
       "tobuf.AnyB\020\252\002\rCoStar.Eventsb\006proto3"
+=======
+      "ogle/protobuf/Any.proto\"G\n\rEventEnvelope" +
+      "\022\021\n\ttimestamp\030\001 \001(\003\022#\n\005event\030\002 \001(\0132\024.goo" +
+      "gle.protobuf.AnyB\020\252\002\rCoStar.Eventsb\006prot" +
+      "o3"
+>>>>>>> 335f758b452488ec0779b8e327fdaf06d759bbab
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.AnyProto.getDescriptor(),
+<<<<<<< HEAD
           com.google.protobuf.TimestampProto.getDescriptor(),
+=======
+>>>>>>> 335f758b452488ec0779b8e327fdaf06d759bbab
         });
     internal_static_costar_events_EventEnvelope_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -734,7 +744,10 @@ public final class EventEnvelopeOuterClass {
         internal_static_costar_events_EventEnvelope_descriptor,
         new java.lang.String[] { "Timestamp", "Event", });
     com.google.protobuf.AnyProto.getDescriptor();
+<<<<<<< HEAD
     com.google.protobuf.TimestampProto.getDescriptor();
+=======
+>>>>>>> 335f758b452488ec0779b8e327fdaf06d759bbab
   }
 
   // @@protoc_insertion_point(outer_class_scope)
