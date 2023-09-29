@@ -50,7 +50,7 @@
         <schema.registry.url>http://localhost:8081</schema.registry.url>
         <schema.registry.basic.auth.user.info></schema.registry.basic.auth.user.info>
 
-        <avro-maven-plugin>1.9.2</avro-maven-plugin>
+        <avro-maven-plugin>1.11.3</avro-maven-plugin>
         <protoc.jar.maven.plugin>3.11.1</protoc.jar.maven.plugin>
         <jsonschema2pojo-maven-plugin>1.0.2</jsonschema2pojo-maven-plugin>
 
